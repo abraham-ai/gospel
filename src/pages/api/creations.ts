@@ -14,21 +14,26 @@ interface ApiRequest extends NextApiRequest {
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
   const { username, generators, earliestTime, latestTime, limit } = req.body;
-  const authToken = req.session.token;
+  // const authToken = req.session.token;
 
-  if (!authToken) {
-    return res.status(401).json({ error: 'Not authenticated' })
-  }
+  // if (!authToken) {
+  //   return res.status(401).json({ error: 'Not authenticated' })
+  // }
 
   try {
     const eden = new EdenClient();
-    eden.setAuthToken(authToken);
+    //eden.setAuthToken(authToken);
+    // eden.loginApi(
+    //   "afb9da36e8b2e9143afd6479b0c43b033bf2f17fa4bf9a48","2c6cb1042e90fed840a5f3a4d7b88ba233a8be6a7e9e5817"
+    // )
 
     // const username = req.session.username;
 
     const filter = {};
     Object.assign(filter, username ? { username: username } : {})
     Object.assign(filter, generators ? { generators: generators } : {})
+    
+    
     Object.assign(filter, earliestTime ? { earliestTime: earliestTime } : {})
     Object.assign(filter, latestTime ? { latestTime: latestTime } : {})
     Object.assign(filter, limit ? { limit: limit } : {})

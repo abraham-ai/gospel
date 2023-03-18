@@ -13,7 +13,7 @@ const taskQueue: {
   taskId: string, 
   status: string, 
   config: any,
-  authToken: string, 
+  // authToken: string, 
   result: any
 }[] = [];
 
@@ -27,8 +27,10 @@ const processNextTask = async () => {
     return;
   }
 
-  const { taskId, config, authToken } = newTask;
-  const result = await generateMonologue(authToken, config);
+  //const { taskId, config, authToken } = newTask;
+  const { taskId, config } = newTask;
+  //const result = await generateMonologue(authToken, config);
+  const result = await generateMonologue(config);
 
   console.log("got this monologue");
   console.log(result.uri);
@@ -44,11 +46,11 @@ const processNextTask = async () => {
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
   const { config } = req.body;
-  const authToken = req.session.token;
+  // const authToken = req.session.token;
 
-  if (!authToken) {
-    return res.status(401).json({ error: "Not authenticated" });
-  }
+  // if (!authToken) {
+  //   return res.status(401).json({ error: "Not authenticated" });
+  // }
 
   try {
     const randomTaskId = Math.random().toString(36).substring(2, 15);
@@ -57,7 +59,7 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
       taskId: randomTaskId, 
       status: "queued",
       config: config,
-      authToken: authToken,
+      // authToken: authToken,
       result: null,
     };
 

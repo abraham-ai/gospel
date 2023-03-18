@@ -33,23 +33,31 @@ function getItem(
 
 const MainPageContent = () => {
 
-  const { address, isConnected } = useAccount();
-  const { isSignedIn, setIsSignedIn } = useContext(AppContext);
+  //const { address, isConnected } = useAccount();
+  //const { isSignedIn, setIsSignedIn } = useContext(AppContext);
+
+
+  // const items: MenuItem[] = [
+  //   getItem('User', 'sub1', <UserOutlined />, [
+  //     getItem('My account', '1'),
+  //     ...(isConnected && isSignedIn ? [
+  //       getItem('My creations', '2'),
+  //     ] : []),
+  //   ]),
+  //   (isConnected && isSignedIn ?
+  //     getItem('App', 'sub2', <ToolOutlined />, [
+  //       // getItem('Character', '3'), 
+  //       getItem('Generate story', '4'), 
+  //     ]
+  //   ) : null),
+  // ];
 
 
   const items: MenuItem[] = [
     getItem('User', 'sub1', <UserOutlined />, [
-      getItem('My account', '1'),
-      ...(isConnected && isSignedIn ? [
-        getItem('My creations', '2'),
-      ] : []),
-    ]),
-    (isConnected && isSignedIn ?
-      getItem('App', 'sub2', <ToolOutlined />, [
-        // getItem('Character', '3'), 
-        getItem('Generate story', '4'), 
-      ]
-    ) : null),
+      getItem('Generate', '1'), 
+      getItem('Creations', '2'),
+    ])
   ];
 
   const [collapsed, setCollapsed] = useState(false);
@@ -68,7 +76,6 @@ const MainPageContent = () => {
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }} />
-
         <Menu
           theme="dark"
           defaultSelectedKeys={['1']}
@@ -80,15 +87,13 @@ const MainPageContent = () => {
       </Sider>
       <Layout className="site-layout">
         <Header style={{ padding: 16, background: colorBgContainer, marginLeft: "auto", marginRight: 20 }}>
-          <ConnectButton />
+          {/* <ConnectButton /> */}
         </Header>
         <Content style={{ margin: '0 16px', padding: "16px", background: colorBgContainer }}>       
-          {activeItem === '1' && <Account />}
+          {/* {activeItem === '1' && <Account />} */}
+          {activeItem === '1' && <StoryGenerator />}
           {activeItem === '2' && <Profile />}
-          
           {/* {activeItem === '3' && <CharacterCreator />} */}
-          {activeItem === '4' && <StoryGenerator />}
-
         </Content>
         <Footer style={{ textAlign: 'center' }}></Footer>
       </Layout>
