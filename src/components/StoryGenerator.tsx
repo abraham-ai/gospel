@@ -43,7 +43,7 @@ const CharacterCreator = () => {
   useEffect(() => {
     console.log("now wnow");
     if (Object.keys(values1).length > 0) {
-      //requestCreation(values1, "lucy");
+      requestCreation(values1, "lucy");
       setMessage1("Question submitted!");
       form1.resetFields();
       setTimeout(() => {setMessage1(null)}, 3000);      
@@ -52,7 +52,7 @@ const CharacterCreator = () => {
 
   useEffect(() => {
     if (Object.keys(values2).length > 0) {
-      //requestCreation(values2, "jmill");
+      requestCreation(values2, "jmill");
       setMessage1("Question submitted!");
       form2.resetFields();
       setTimeout(() => {setMessage1(null)}, 3000);      

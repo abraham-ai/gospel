@@ -88,7 +88,7 @@ export const generateMonologue = async (authToken: string, config: any) => {
     text: monologue.slice(0, 600),
     voice: "clone",
     voice_file_urls: voice_file_urls,
-    preset: "ultra_fast", //['ultra_fast', 'fast', 'standard', 'high_quality']
+    preset: "high_quality", //['ultra_fast', 'fast', 'standard', 'high_quality']
   });
   console.log(tts_result);
 
@@ -122,8 +122,8 @@ export const generateMonologue = async (authToken: string, config: any) => {
   const w2l_result = await eden.create("wav2lip", {
     speech_url: tts_result.uri,
     face_url: face_result.uri,
-    gfpgan: false,
-    gfpgan_upscale: 1.0,
+    gfpgan: true,
+    gfpgan_upscale: 2.0,
     intro_text: introText
   });
   console.log("w2l", w2l_result);
