@@ -22,11 +22,11 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
 
   try {
     const eden = new EdenClient();
-    //eden.setAuthToken(authToken);
-    // eden.loginApi(
-    //   "afb9da36e8b2e9143afd6479b0c43b033bf2f17fa4bf9a48","2c6cb1042e90fed840a5f3a4d7b88ba233a8be6a7e9e5817"
-    // )
-
+    eden.loginApi(
+      process.env.EDEN_API_KEY as string,
+      process.env.EDEN_API_SECRET as string
+    )
+  
     // const username = req.session.username;
 
     const filter = {};

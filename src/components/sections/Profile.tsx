@@ -44,7 +44,7 @@ const Profile = () => {
         const filter = {
           // limit: 100, 
           generators: ["wav2lip"],
-          earliestTime: "3/18/2023 20:38"
+          earliestTime: "3/18/2023 21:18"
         };
         const response = await axios.post("/api/creations", filter);
         const data = response.data.creations &&

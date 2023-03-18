@@ -178,7 +178,7 @@ type Character = keyof typeof characters;
     face_url = face_result.uri;
   }
 
-  const characterName = character.name === "JayMill" ? "Jmill" : "Lucy";
+  const characterName = character.name === "JayMill" ? "Jmill" : character.name;
   const introText = `${characterName}, ${config.question}`;
 
   const w2l_result = await eden.create("wav2lip", {
