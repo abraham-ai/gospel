@@ -138,14 +138,14 @@ type Character = keyof typeof characters;
   let tts_result;
   if (character.name === "Opalyst") {
     tts_result = await eden.create("tts_fast", {
-      text: monologue.slice(0, 600),
+      text: monologue(0, 900),
       voice: character.tts_voice,
       preset: "high-quality",
     });
   } else {
     const voice_file_urls = character.voice_file_urls;
     tts_result = await eden.create("tts", {
-      text: monologue.slice(0, 600),
+      text: monologue,
       voice: "clone",
       voice_file_urls: voice_file_urls,
       preset: "high_quality", //['ultra_fast', 'fast', 'standard', 'high_quality']
