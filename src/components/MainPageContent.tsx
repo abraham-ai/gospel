@@ -10,7 +10,8 @@ import AppContext from 'context/AppContext'
 
 import Account from "components/sections/Account";
 import Profile from "components/sections/Profile";
-import GeneratorInterface from "components/sections/GeneratorInterface"
+// import CharacterCreator from "components/CharacterCreator"
+import StoryGenerator from "components/StoryGenerator"
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -45,15 +46,8 @@ const MainPageContent = () => {
     ]),
     (isConnected && isSignedIn ?
       getItem('App', 'sub2', <ToolOutlined />, [
-        getItem('Create', '5'), 
-        getItem('Interpolate', '6'),
-        getItem('Real2Real', '7'),
-        getItem('Remix', '8'),
-        getItem('Interrogate', '9'),
-        getItem('Lora train', '10'),
-        getItem('TTS', '11'),
-        getItem('Wav2Lip', '12'),
-        getItem('Complete', '13'),
+        // getItem('Character', '3'), 
+        getItem('Generate story', '4'), 
       ]
     ) : null),
   ];
@@ -91,15 +85,10 @@ const MainPageContent = () => {
         <Content style={{ margin: '0 16px', padding: "16px", background: colorBgContainer }}>       
           {activeItem === '1' && <Account />}
           {activeItem === '2' && <Profile />}
-          {activeItem === '5' && <GeneratorInterface mediaType="image" generatorName="create" />}
-          {activeItem === '6' && <GeneratorInterface mediaType="video" generatorName="interpolate" />}
-          {activeItem === '7' && <GeneratorInterface mediaType="video" generatorName="real2real" />}
-          {activeItem === '8' && <GeneratorInterface mediaType="image" generatorName="remix" />}
-          {activeItem === '9' && <GeneratorInterface mediaType="text" generatorName="interrogate" />}
-          {activeItem === '10' && <GeneratorInterface mediaType="text" generatorName="lora" />}
-          {activeItem === '11' && <GeneratorInterface mediaType="audio" generatorName="tts" />}
-          {activeItem === '12' && <GeneratorInterface mediaType="video" generatorName="wav2lip" />}
-          {activeItem === '13' && <GeneratorInterface mediaType="text" generatorName="complete" />}
+          
+          {/* {activeItem === '3' && <CharacterCreator />} */}
+          {activeItem === '4' && <StoryGenerator />}
+
         </Content>
         <Footer style={{ textAlign: 'center' }}></Footer>
       </Layout>

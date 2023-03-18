@@ -32,6 +32,7 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
     Object.assign(filter, earliestTime ? { earliestTime: earliestTime } : {})
     Object.assign(filter, latestTime ? { latestTime: latestTime } : {})
     Object.assign(filter, limit ? { limit: limit } : {})
+    // Object.assign(filter, { limit: 100 })
     
     console.log("getCreations filter", filter);
 

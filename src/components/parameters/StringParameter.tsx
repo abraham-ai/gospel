@@ -1,6 +1,7 @@
 import { Form, Input, Col, Row, Button } from "antd";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
+const { TextArea } = Input;
 
 const StringParameter = (props: {form: any, parameter: any}) => {
   const [value, setValue] = useState(props.parameter.default);
@@ -91,10 +92,18 @@ const StringParameter = (props: {form: any, parameter: any}) => {
                   message: `${props.parameter.label} required`
                 }]}
               >
-                <Input 
-                  value={value} 
-                  onChange={event => {setValue(event.target.value)}}
-                />
+                {props.parameter.long ? (
+                  <TextArea 
+                    rows={6} 
+                    value={value} 
+                    onChange={event => {setValue(event.target.value)}}
+                  /> 
+                ) : ( 
+                  <Input 
+                    value={value} 
+                    onChange={event => {setValue(event.target.value)}}
+                  />
+                )}
               </Form.Item>
             </Col>
           </Row>
