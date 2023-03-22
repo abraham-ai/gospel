@@ -156,7 +156,7 @@ const CharacterCreator = () => {
       
       {message3 && <p>{message3}</p>}
       <hr />
-
+{/* 
       <h1>Lucy and Jmill conversation</h1>
 
       <Form form={form4} name="generate" onFinish={handleFinish4}>      
@@ -172,7 +172,7 @@ const CharacterCreator = () => {
       </Form>
 
       {message4 && <p>{message4}</p>}
-      <hr />
+      <hr /> */}
       
     </>
   );
