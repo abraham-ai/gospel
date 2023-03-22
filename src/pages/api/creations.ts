@@ -23,7 +23,7 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
   // }
 
   try {
-    console.log("go", process.env.EDEN_API_URL)
+    // console.log("go", process.env.EDEN_API_URL)
     // const eden = new EdenClient(process.env.EDEN_API_URL as string);
     const eden = new EdenClient();
     

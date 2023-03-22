@@ -42,7 +42,7 @@ const Profile = () => {
       setLoading(true);
       try {
         const filter = {
-          limit: 100, 
+          // limit: 100, 
           generators: ["wav2lip"],
           earliestTime: "3/18/2023 21:18"
         };
