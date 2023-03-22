@@ -16,12 +16,16 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
   const { username, generators, earliestTime, latestTime, limit } = req.body;
   // const authToken = req.session.token;
 
+  console.log("creationds")
+
   // if (!authToken) {
   //   return res.status(401).json({ error: 'Not authenticated' })
   // }
 
   try {
-    const eden = new EdenClient();
+    console.log("go", process.env.EDEN_API_URL)
+    const eden = new EdenClient(process.env.EDEN_API_URL as string);
+    
     eden.loginApi(
       process.env.EDEN_API_KEY as string,
       process.env.EDEN_API_SECRET as string

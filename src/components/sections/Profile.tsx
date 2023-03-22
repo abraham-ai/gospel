@@ -12,14 +12,13 @@ const Profile = () => {
   const [creations, setCreations] = useState<object[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string | null>(null);
-  const {profile} = useProfile();
+  // const {profile} = useProfile();
   
   const [configVisible, setConfigVisible] = useState<boolean>(false);
   const [resultVisible, setResultVisible] = useState<boolean>(false);
   const [config, setConfig] = useState<object>({});
   const [result, setResult] = useState<string>("");
   const [outputType, setOutputType] = useState<string>("image");
-  
   
 
   const getOutputType = (generatorName: string) => {
@@ -36,13 +35,14 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchCreations = async () => {
-      if (!profile || !profile.username) {
-        return;
-      }
+      console.log("fetching creations")
+      // if (!profile || !profile.username) {
+      //   return;
+      // }
       setLoading(true);
       try {
         const filter = {
-          // limit: 100, 
+          limit: 100, 
           generators: ["wav2lip"],
           earliestTime: "3/18/2023 21:18"
         };
@@ -67,7 +67,8 @@ const Profile = () => {
       setLoading(false);
     };
     fetchCreations();
-  }, [profile]);
+  // }, [profile]);
+}, []);
 
   const handleConfigClick = (creation: any) => {
     setConfig(creation.config);

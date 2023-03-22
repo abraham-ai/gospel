@@ -1,17 +1,21 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { withSessionRoute } from "util/withSession";
 import { generateMonologue } from "scripts/monologue";
+import { generateConversation } from "scripts/conversation";
+
 
 
 interface ApiRequest extends NextApiRequest {
   body: {
     config: any;
+    mode: string;
   };
 }
 
 const taskQueue: {
   taskId: string, 
   status: string, 
+  mode: string,
   config: any,
   // authToken: string, 
   result: any
@@ -28,9 +32,15 @@ const processNextTask = async () => {
   }
 
   //const { taskId, config, authToken } = newTask;
-  const { taskId, config } = newTask;
+  const { taskId, mode, config } = newTask;
   //const result = await generateMonologue(authToken, config);
-  const result = await generateMonologue(config);
+
+  let result;
+  if (mode == "monologue") {
+    result = await generateMonologue(config);
+  } else if (mode == "conversation") {
+    result = await generateConversation(config);
+  } 
 
   console.log("got this monologue");
   console.log(result.uri);
@@ -45,7 +55,7 @@ const processNextTask = async () => {
 };
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
-  const { config } = req.body;
+  const { mode, config } = req.body;
   // const authToken = req.session.token;
 
   // if (!authToken) {
@@ -58,6 +68,7 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
     const newTask = {
       taskId: randomTaskId, 
       status: "queued",
+      mode: mode,
       config: config,
       // authToken: authToken,
       result: null,

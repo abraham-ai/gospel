@@ -37,6 +37,25 @@ const CharacterCreator = () => {
         character: character
       };
       const response = await axios.post("/api/create", {
+        mode: "monologue",
+        config: config,
+      });
+      const newTaskId = response.data.taskId;
+    }
+    catch (error: any) {
+      console.log(error)
+    }
+  };
+
+
+  const requestConversation = async (values: any, characters: string[]) => {
+    try {
+      const config = {
+        topic: values.topic,
+        characters: characters
+      };
+      const response = await axios.post("/api/create", {
+        mode: "conversation",
         config: config,
       });
       const newTaskId = response.data.taskId;
@@ -76,7 +95,7 @@ const CharacterCreator = () => {
 
   useEffect(() => {
     if (Object.keys(values4).length > 0) {
-      //requestCreation(values4, "jmill");
+      requestConversation(values4, ["jmill", "lucy"]);
       setMessage4("Conversation submitted!");
       form4.resetFields();
       setTimeout(() => {setMessage4(null)}, 3000);      
@@ -138,10 +157,10 @@ const CharacterCreator = () => {
       {message3 && <p>{message3}</p>}
       <hr />
 
-      {/* <h1>Lucy and Jmill conversation</h1>
+      <h1>Lucy and Jmill conversation</h1>
 
       <Form form={form4} name="generate" onFinish={handleFinish4}>      
-        <Form.Item label="Question" name="question" rules={[{ required: true, message: 'Please describe what the conversation is about!' }]}>
+        <Form.Item label="Topic" name="topic" rules={[{ required: true, message: 'Please describe what the conversation is about!' }]}>
           <Input placeholder="Give Jmill and Lucy a topic to converse about" />
         </Form.Item>
 
@@ -153,7 +172,7 @@ const CharacterCreator = () => {
       </Form>
 
       {message4 && <p>{message4}</p>}
-      <hr /> */}
+      <hr />
       
     </>
   );
