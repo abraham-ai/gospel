@@ -20,7 +20,13 @@ const vanessa: Character = {
     'https://minio.aws.abraham.fun/creations-stg/0565f4555e662147eb9b32f19a870c6397d91d6ecf8386082bde2cc66c5b4153.wav'
   ],
   preset_faces: [
-    
+    'https://minio.aws.abraham.fun/creations-stg/6810a2696bd85744f0eb1b2b30574d23dc34c258f7711c30cf8ee8bcd1e16b03.jpg',
+    'https://minio.aws.abraham.fun/creations-stg/fd118136dc9bab40a5f9e18ed3c6937ef6eac5738fb6d9b3232d2ec3c66e568c.jpg',
+    'https://minio.aws.abraham.fun/creations-stg/ddb706e2c9eed7d57909a9ffa3636a7673f9dd4c3c907273d544d39bd0d51651.jpg',
+    'https://minio.aws.abraham.fun/creations-stg/c3ded68222e1e3038f946f08357fd017e62f0b180b8399bd65449d9a5a1ca961.jpg',
+    'https://minio.aws.abraham.fun/creations-stg/8ce9ed8b6cff674922ff1e93c89e2b4083f5bef2d3569cc1b7ee8980b4642109.jpg',
+    'https://minio.aws.abraham.fun/creations-stg/f24db2d7c0a6147f5d1df985a688455b4dea41d2e983060cc084f34701a7b7a5.jpg',
+    'https://minio.aws.abraham.fun/creations-stg/53963f395c4859bd67b67f074a0dd318aee90cced9c355eaf33a97c779cb2d9d.jpg'
   ]
 };
 
