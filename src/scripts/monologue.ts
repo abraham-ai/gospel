@@ -1,7 +1,7 @@
 import { EdenClient } from 'eden-sdk';
 import characters from '../characters';
 
-type Character = keyof typeof characters;
+// type Character = keyof typeof characters;
 
 const eden = new EdenClient();
 eden.loginApi(
@@ -26,26 +26,35 @@ Lucy and JayMill instantly bonded at Mars College, finding common affinites for 
 In 2023, JayMill and Lucy decided to get engaged at Mars College, and their friends rejoiced. JayMill and Lucy have many common friends at Mars College like Gene, Vanessa, Nico, Zander, Freeman, Ria, Marzipan, Will, Mason, Atin, Wakeen, Caro, Sam, Vincent, and Pseudo.`
 
 
-const makePrompt = function(character: any, question: string) {  
-  if (character.name === "Opalyst") {
-    const prompt = `${character.name}: ${character.bio}
+const makePromptJuicy = function(character: any, question: string) {  
+  const otherName = character.name === "Lucy" ? "JayMill" : "Lucy";
+  const prompt = `${constitution}
+  
+  You are ${character.name}. You are deep into an interview with me, a journalist and philosopher. For the last several hours, I've asked you various questions about life, love, and the universe, as well as your experiences at Mars College and your relationship with ${otherName}. You've given eloquent and witty responses. I ask you: ${question}. You respond:`
+  return prompt;
+}
+
+const makePrompt = function(character: any, question: string) {
+  const prompt = `${character.name}: ${character.bio}
     
-    You are ${character.name}. You are deep into an interview with me, a journalist and philosopher. For the last several hours, I've asked you various questions about life, love, and the universe. You've given eloquent and witty responses. I ask you: ${question}. You respond:`
-    return prompt;
-  }
-  else {
-    const otherName = character.name === "Lucy" ? "JayMill" : "Lucy";
-    const prompt = `${constitution}
-    
-    You are ${character.name}. You are deep into an interview with me, a journalist and philosopher. For the last several hours, I've asked you various questions about life, love, and the universe, as well as your experiences at Mars College and your relationship with ${otherName}. You've given eloquent and witty responses. I ask you: ${question}. You respond:`
-    return prompt;
-  }
+  You are ${character.name}. You are deep into an interview with me, a journalist and philosopher. For the last several hours, I've asked you various questions about life, love, and the universe. You've given eloquent and witty responses. I ask you: ${question}. You respond:`
+  return prompt;
 }
 
 export const generateMonologue = async (config: any) => {
-  const character = characters[config.character as Character];
+  // const character = characters[config.character as Character];
+  const character = config.character;
 
-  const prompt = makePrompt(character, config.question);
+  console.log("my character: ", character);
+  console.log("my character: ", character.name);
+  console.log("my question: ", config.question);
+
+  let prompt;
+  if (character.name === "JayMill" || character.name === "Lucy") {
+    prompt = makePromptJuicy(character, config.question);
+  } else {
+    prompt = makePrompt(character, config.question);
+  }
 
   const monologue_result = await eden.create("complete", {
     prompt: prompt,

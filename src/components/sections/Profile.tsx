@@ -7,7 +7,8 @@ import VideoResult from "components/media/VideoResult";
 import TextResult from "components/media/TextResult";
 import AudioResult from "components/media/AudioResult";
 
-const Profile = () => {
+
+const Profile = (props: {characterName: string}) => {
 
   const [creations, setCreations] = useState<object[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -43,6 +44,7 @@ const Profile = () => {
       try {
         const filter = {
           // limit: 100, 
+          characterName: props.characterName,
           generators: ["wav2lip"],
           earliestTime: "3/18/2023 21:18"
         };
@@ -109,26 +111,26 @@ const Profile = () => {
       dataIndex: 'name',
       key: 'name',
     },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-    },
+    // {
+    //   title: 'Status',
+    //   dataIndex: 'status',
+    //   key: 'status',
+    // },
     {
       title: 'Output',
       dataIndex: 'output',
       key: 'output',
       render: (output: string, record: any) => (
-        <a onClick={() => handleResultClick(output, record.outputType)}>output</a>
+        <a onClick={() => handleResultClick(output, record.outputType)}>open</a>
       )
     },
-    {
-      title: "Config",
-      key: "config",
-      render: (creation: any) => (
-        <a onClick={() => handleConfigClick(creation)}>config</a>
-      ),
-    },
+    // {
+    //   title: "Config",
+    //   key: "config",
+    //   render: (creation: any) => (
+    //     <a onClick={() => handleConfigClick(creation)}>config</a>
+    //   ),
+    // },
   ];
 
   return (    
@@ -144,22 +146,38 @@ const Profile = () => {
       </Modal>
 
       <Modal
-        title="Result"
+        title={null}
         open={resultVisible}
         onOk={handleResultModalOk}
         onCancel={handleResultModalCancel}
         footer={null}
       >
-        {outputType == "image" && <ImageResult resultUrl={result} />}
-        {outputType == "video" && <VideoResult resultUrl={result} />}
-        {outputType == "audio" && <AudioResult resultUrl={result} />}
-        {outputType == "text" && <TextResult resultUrl={result} />}
+        {/* {outputType == "image" && <ImageResult resultUrl={result} className="video-player full-screen"  />} */}
+        {outputType == "video" && <VideoResult resultUrl={result} className="full-screen"  />}
+        {/* {outputType == "audio" && <AudioResult resultUrl={result} className="video-player full-screen"  />} */}
+        {/* {outputType == "text" && <TextResult resultUrl={result} className="video-player full-screen"  />} */}
       </Modal>
 
+      <h1>{props.characterName}</h1>
       {message && <p>{message}</p>}
       {loading ? <p>Loading...</p> : <>
         <Table dataSource={creations} columns={columns} />
       </>}
+
+      <style>
+        {`
+          .ant-modal, .ant-modal-content {
+            height: 99vh;
+            width: 99vw;
+            margin: 0;
+            top: 0;
+           }
+           .ant-modal-body {
+            height: calc(100vh - 110px);
+           }
+        `}
+      </style>
+      
     </>
   );
 };

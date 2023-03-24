@@ -13,6 +13,10 @@ import Profile from "components/sections/Profile";
 // import CharacterCreator from "components/CharacterCreator"
 import StoryGenerator from "components/StoryGenerator"
 
+import Character from "characters/Character";
+import characters from "characters";
+
+
 const { Header, Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -52,12 +56,18 @@ const MainPageContent = () => {
   //   ) : null),
   // ];
 
+  let sections: MenuItem[] = [];
+  Object.keys(characters).map((key) => {
+    const character = characters[key];
+    const characterName = character.name == "JayMill" ? "Jmill": character.name;
+    sections.push(getItem(characterName, key));
+  });
 
   const items: MenuItem[] = [
-    getItem('User', 'sub1', <UserOutlined />, [
+    getItem('Tools', 'sub1', <UserOutlined />, [
       getItem('Generate', '1'), 
-      getItem('Creations', '2'),
-    ])
+    ]),
+    getItem('Monologues', 'sub1', <UserOutlined />, sections)
   ];
 
   const [collapsed, setCollapsed] = useState(false);
@@ -90,10 +100,15 @@ const MainPageContent = () => {
           {/* <ConnectButton /> */}
         </Header>
         <Content style={{ margin: '0 16px', padding: "16px", background: colorBgContainer }}>       
-          {/* {activeItem === '1' && <Account />} */}
           {activeItem === '1' && <StoryGenerator />}
-          {activeItem === '2' && <Profile />}
-          {/* {activeItem === '3' && <CharacterCreator />} */}
+          {Object.keys(characters).map((key) => {
+            const character = characters[key];
+            const characterName = character.name == "JayMill" ? "Jmill": character.name;
+            return (<>
+                {activeItem === key && <Profile key={key} characterName={characterName} /> }
+              </>
+            )
+          })}
         </Content>
         <Footer style={{ textAlign: 'center' }}></Footer>
       </Layout>

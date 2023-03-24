@@ -4,6 +4,7 @@ import { EdenClient } from 'eden-sdk';
 
 interface ApiRequest extends NextApiRequest {
   body: {
+    characterName: string | null;
     username: string
     generators: string[]
     earliestTime: number
@@ -13,7 +14,7 @@ interface ApiRequest extends NextApiRequest {
 }
 
 const handler = async (req: ApiRequest, res: NextApiResponse) => {
-  const { username, generators, earliestTime, latestTime, limit } = req.body;
+  const { characterName, username, generators, earliestTime, latestTime, limit } = req.body;
   // const authToken = req.session.token;
 
   console.log("creationds")
@@ -35,19 +36,25 @@ const handler = async (req: ApiRequest, res: NextApiResponse) => {
     // const username = req.session.username;
 
     const filter = {};
-    Object.assign(filter, username ? { username: username } : {})
-    Object.assign(filter, generators ? { generators: generators } : {})
-    
-    
-    Object.assign(filter, earliestTime ? { earliestTime: earliestTime } : {})
-    Object.assign(filter, latestTime ? { latestTime: latestTime } : {})
-    Object.assign(filter, limit ? { limit: limit } : {})
+    Object.assign(filter, username ? { username: username } : {});
+    Object.assign(filter, generators ? { generators: generators } : {});
+    Object.assign(filter, earliestTime ? { earliestTime: earliestTime } : {});
+    Object.assign(filter, latestTime ? { latestTime: latestTime } : {});
+    Object.assign(filter, limit ? { limit: limit } : {});
     
     console.log("getCreations filter", filter);
 
     const creations = await eden.getCreations(filter);
 
-    return res.status(200).json({ creations: creations })
+    if (characterName) {
+      const filteredCreations = creations.filter((creation: any) => creation.name.startsWith(characterName));
+      return res.status(200).json({ creations: filteredCreations })
+    }
+    else {
+      return res.status(200).json({ creations: creations })
+    }
+
+
   } catch (error: any) {
     if (error.response.data == 'jwt expired') {
       return res.status(401).json({ error: 'Authentication expired' })
