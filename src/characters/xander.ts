@@ -34,7 +34,7 @@ const xander: Character = {
     'https://minio.aws.abraham.fun/creations-stg/54211bfe41fae0c05f70d6bc5947f1f45c9c8d22a59fb5e5a145aa445a794d7d.jpg',
     'https://minio.aws.abraham.fun/creations-stg/72709b80cb4c9b316c4a9acc4468d9b3bfe285e38b375ac39968c39009e7e2b8.jpg',
     'https://minio.aws.abraham.fun/creations-stg/0114a3c4555529042fa43aeec4f4092d2fc290d4e92fa275bb68f9d215dd19a0.jpg',
-    'https://minio.aws.abraham.fun/creations-stg/29c29aca6e3254c8f7e72fd53d2fb5be4a065abbbab20dc12228d999454559dd.jpg'
+    // 'https://minio.aws.abraham.fun/creations-stg/29c29aca6e3254c8f7e72fd53d2fb5be4a065abbbab20dc12228d999454559dd.jpg'
   ]
 };
 

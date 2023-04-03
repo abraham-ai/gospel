@@ -9,6 +9,7 @@ import lucy from './lucy';
 import marzipan from './marzipan';
 import opalyst from './opalyst';
 import seamus from './seamus';
+import tao from './tao';
 import vanessa from './vanessa';
 import vincent from './vincent';
 import xander from './xander';
@@ -28,6 +29,7 @@ const characters : Characters = {
 	opalyst,
 	seamus,
 	vanessa,
+	tao,
 	vincent,
 	xander
 };
